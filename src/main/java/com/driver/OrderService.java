@@ -53,12 +53,25 @@ public class OrderService {
     }
 
     // Get count of orders which are not assigned to any partner:
-    // GET /orders/get-count-of-unassigned-orders  No params or body
-    // required  Return Integer wrapped in a ResponseEntity object 
-    // Controller Name - getCountOfUnassignedOrders
+
 
 public  int CountOfodresUnassingPartnerService(){
       return   orderRepository.CountOfOrderNotAssignPartnerRepo();
+}
+public String LastoderDeliveryTimeService(String id){
+        return orderRepository.LastDeliveryMadeRespo(id);
+}
+// deleted
+    public void DeltedpartnerIdService(String id){
+        orderRepository.DeltedParteneridRespo(id);
+    }
+    //Delete an order and the corresponding partner should be unassigned:
+    // DELETE /orders/delete-order-by-id/{orderId}  Pass orderId as path variable  
+    // Return success message wrapped in a ResponseEntity object  Controller Name - deleteOrderById
+public void DeletedOrderIdService(String id){
+        orderRepository.DeletedOrderIdResp(id);
+
+
 }
 
 }

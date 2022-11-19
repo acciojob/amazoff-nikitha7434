@@ -98,7 +98,63 @@ public class OrderRepository {
 
 
 
+    //Get the time at which the last delivery is made by given partner:
 
 
+    public String LastDeliveryMadeRespo(String id){
+        String Time="";
+
+        List<String> lastDeliveryId =PairHm.get(id);
+
+        String lastOrderId=lastDeliveryId.get(lastDeliveryId.size()-1);
+
+        int mins=OrderHm.get(lastOrderId).getDeliveryTime();
+        Time=IntToStringTimeFromate(mins);
+        return Time;
+
+    }
+
+    private String IntToStringTimeFromate(int mins) {
+        int hours =mins/60;
+        int minute=mins%60;
+        String time = " ";
+         if(hours<9){
+             time +="0"+String.valueOf(hours)+":";
+         }else{
+             time +=String.valueOf(hours)+":";
+         }
+         if(mins<9){
+             time+="0"+String.valueOf(minute);
+         }
+         else{
+             time+=String.valueOf(minute);
+         }
+        return time;
+    }
+
+    //Delete a partner and the corresponding orders should be unassigned:
+
+    public void DeltedParteneridRespo(String partnerid){
+
+        DeliveryPartnerhm.remove(partnerid);
+        DeleteOrder(PairHm.get(partnerid));
+        PairHm.remove(partnerid);
+
+    }
+
+
+    public void DeleteOrder(List<String> strings) {
+
+        for(String orderid :strings){
+            OrderHm.remove(orderid);
+        }
+
+
+    }
+    public void DeletedOrderIdResp(String id){
+
+        OrderHm.remove(id);
+
+    }
 
 }

@@ -111,22 +111,24 @@ public class OrderController {
 
         return new ResponseEntity<>(countOfOrders, HttpStatus.CREATED);
     }
-    //pending
+
+    //completed
 
     @GetMapping("/get-last-delivery-time")
     public ResponseEntity<String> getLastDeliveryTimeByPartnerId(@PathVariable String partnerId){
-        String time = null;
+        String time = orderService.LastoderDeliveryTimeService(partnerId);
 
         //Return the time when that partnerId will deliver his last delivery order.
 
         return new ResponseEntity<>(time, HttpStatus.CREATED);
     }
-//pending
+//completed
     @DeleteMapping("/delete-partner-by-id/{partnerId}")
     public ResponseEntity<String> deletePartnerById(@PathVariable String partnerId){
 
         //Delete the partnerId
         //And push all his assigned orders to unassigned orders.
+        orderService.DeltedpartnerIdService(partnerId);
 
         return new ResponseEntity<>(partnerId + " removed successfully", HttpStatus.CREATED);
     }
@@ -136,6 +138,7 @@ public class OrderController {
 
         //Delete an order and also
         // remove it from the assigned order of that partnerId
+        orderService.DeletedOrderIdService(orderId);
 
         return new ResponseEntity<>(orderId + " removed successfully", HttpStatus.CREATED);
     }
